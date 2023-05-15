@@ -123,6 +123,153 @@ body {
   padding: 0 1rem;
 }
 
+body::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.8s ease 0s;
+  -o-transition: opacity 0.8s ease 0s;
+  transition: opacity 0.8s ease 0s;
+  pointer-events: none;
+  z-index: 149;
+}
+
+.popup-show body::after {
+  opacity: 1;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 30px 10px;
+  -webkit-transition: visibility 0.8s ease 0s;
+  -o-transition: visibility 0.8s ease 0s;
+  transition: visibility 0.8s ease 0s;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.popup_show {
+  z-index: 150;
+  visibility: visible;
+  overflow: auto;
+  pointer-events: auto;
+}
+
+.popup_show .popup__content {
+  visibility: visible;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.popup__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+}
+
+.popup__content {
+  visibility: hidden;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  -o-transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 109px 43px rgba(37, 42, 47, 0.01), 0px 61px 37px rgba(37, 42, 47, 0.05), 0px 27px 27px rgba(37, 42, 47, 0.09), 0px 7px 15px rgba(37, 42, 47, 0.1), 0px 0px 0px rgba(37, 42, 47, 0.1);
+          box-shadow: 0px 109px 43px rgba(37, 42, 47, 0.01), 0px 61px 37px rgba(37, 42, 47, 0.05), 0px 27px 27px rgba(37, 42, 47, 0.09), 0px 7px 15px rgba(37, 42, 47, 0.1), 0px 0px 0px rgba(37, 42, 47, 0.1);
+  border-radius: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 100%;
+  max-width: 386px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+.lock .popup__content {
+  visibility: visible;
+}
+
+.popup__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(135, 143, 163, 0.5);
+  width: 20px;
+  height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 50%;
+}
+
+.popup__text {
+  line-height: 1.5555555556;
+  font-weight: 700;
+}
+
+.popup__link {
+  background: #FDDC2B;
+  border-radius: 100px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  line-height: 1.1666666667;
+  font-weight: 700;
+}
+
 [class*=-ibg] {
   position: relative;
 }
@@ -331,7 +478,7 @@ body {
   background: -o-linear-gradient(top, #FDDC2B 0%, #E4C312 100%);
   background: linear-gradient(180deg, #FDDC2B 0%, #E4C312 100%);
   border-radius: 100px;
-  width: 100%;
+  width: 0%;
   -webkit-transition: width 1s linear;
   -o-transition: width 1s linear;
   transition: width 1s linear;
@@ -407,6 +554,34 @@ body {
 }
 
 @media (min-width: 64.25em) {
+  .popup__content {
+    padding-left: 2.5rem;
+  }
+
+  .popup__content {
+    padding-right: 2.5rem;
+  }
+
+  .popup__icon {
+    margin-bottom: 0.3125rem;
+  }
+
+  .popup__text {
+    font-size: 1.125rem;
+  }
+
+  .popup__text {
+    margin-bottom: 1.4375rem;
+  }
+
+  .popup__link {
+    min-height: 4.375rem;
+  }
+
+  .popup__link {
+    font-size: 1.125rem;
+  }
+
   .application__body {
     padding-top: 2.5rem;
   }
@@ -567,11 +742,45 @@ body {
 
 @media (max-width: 550px) {
   .timer-application__items {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
 }
 
 @media (max-width: 22.5em) {
+  .popup__content {
+    padding-left: 2.25rem;
+  }
+
+  .popup__content {
+    padding-right: 2.25rem;
+  }
+
+  .popup__icon {
+    margin-bottom: 0.625rem;
+  }
+
+  .popup__text {
+    font-size: 0.9375rem;
+  }
+
+  .popup__text {
+    margin-bottom: 2rem;
+  }
+
+  .popup__link {
+    min-height: 3.125rem;
+  }
+
+  .popup__link {
+    font-size: 0.9375rem;
+  }
+
   .application__body {
     padding-top: 1.875rem;
   }
@@ -678,6 +887,90 @@ body {
 }
 
 @media (min-width: 22.5em) and (max-width: 64.25em) {
+@supports (padding-left: clamp( 2.25rem , 2.1152694611rem  +  0.5988023952vw , 2.5rem )) {
+    .popup__content {
+      padding-left: clamp( 2.25rem , 2.1152694611rem  +  0.5988023952vw , 2.5rem );
+    }
+}
+
+@supports not (padding-left: clamp( 2.25rem , 2.1152694611rem  +  0.5988023952vw , 2.5rem )) {
+    .popup__content {
+      padding-left: calc(2.25rem + 0.25 * (100vw - 22.5rem) / 41.75);
+    }
+}
+
+@supports (padding-right: clamp( 2.25rem , 2.1152694611rem  +  0.5988023952vw , 2.5rem )) {
+    .popup__content {
+      padding-right: clamp( 2.25rem , 2.1152694611rem  +  0.5988023952vw , 2.5rem );
+    }
+}
+
+@supports not (padding-right: clamp( 2.25rem , 2.1152694611rem  +  0.5988023952vw , 2.5rem )) {
+    .popup__content {
+      padding-right: calc(2.25rem + 0.25 * (100vw - 22.5rem) / 41.75);
+    }
+}
+
+@supports (margin-bottom: clamp( 0.3125rem , 0.7934131737rem  +  -0.748502994vw , 0.625rem )) {
+    .popup__icon {
+      margin-bottom: clamp( 0.3125rem , 0.7934131737rem  +  -0.748502994vw , 0.625rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 0.3125rem , 0.7934131737rem  +  -0.748502994vw , 0.625rem )) {
+    .popup__icon {
+      margin-bottom: calc(0.625rem + -0.3125 * (100vw - 22.5rem) / 41.75);
+    }
+}
+
+@supports (font-size: clamp( 0.9375rem , 0.8364520958rem  +  0.4491017964vw , 1.125rem )) {
+    .popup__text {
+      font-size: clamp( 0.9375rem , 0.8364520958rem  +  0.4491017964vw , 1.125rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.9375rem , 0.8364520958rem  +  0.4491017964vw , 1.125rem )) {
+    .popup__text {
+      font-size: calc(0.9375rem + 0.1875 * (100vw - 22.5rem) / 41.75);
+    }
+}
+
+@supports (margin-bottom: clamp( 1.4375rem , 2.3031437126rem  +  -1.3473053892vw , 2rem )) {
+    .popup__text {
+      margin-bottom: clamp( 1.4375rem , 2.3031437126rem  +  -1.3473053892vw , 2rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 1.4375rem , 2.3031437126rem  +  -1.3473053892vw , 2rem )) {
+    .popup__text {
+      margin-bottom: calc(2rem + -0.5625 * (100vw - 22.5rem) / 41.75);
+    }
+}
+
+@supports (min-height: clamp( 3.125rem , 2.4513473054rem  +  2.994011976vw , 4.375rem )) {
+    .popup__link {
+      min-height: clamp( 3.125rem , 2.4513473054rem  +  2.994011976vw , 4.375rem );
+    }
+}
+
+@supports not (min-height: clamp( 3.125rem , 2.4513473054rem  +  2.994011976vw , 4.375rem )) {
+    .popup__link {
+      min-height: calc(3.125rem + 1.25 * (100vw - 22.5rem) / 41.75);
+    }
+}
+
+@supports (font-size: clamp( 0.9375rem , 0.8364520958rem  +  0.4491017964vw , 1.125rem )) {
+    .popup__link {
+      font-size: clamp( 0.9375rem , 0.8364520958rem  +  0.4491017964vw , 1.125rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.9375rem , 0.8364520958rem  +  0.4491017964vw , 1.125rem )) {
+    .popup__link {
+      font-size: calc(0.9375rem + 0.1875 * (100vw - 22.5rem) / 41.75);
+    }
+}
+
 @supports (padding-top: clamp( 1.875rem , 1.5381736527rem  +  1.497005988vw , 2.5rem )) {
     .application__body {
       padding-top: clamp( 1.875rem , 1.5381736527rem  +  1.497005988vw , 2.5rem );

@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20230515224033">
+	<link rel="stylesheet" href="css/style.min.css?_v=20230515231744">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +28,7 @@
 							<div class="application__subtitle">Курс обмена: 1 USD - 28 673.23 Bitcoin</div>
 						</div>
 						<div class="application__timer timer-application">
-							<div class="timer-application__label">До отмены заявки: <span id="timer">9 мин. 39 сек.</span></div>
+							<div class="timer-application__label">До отмены заявки: <span id="timer"></span></div>
 							<div class="timer-application__line"><span id="progress"></span></div>
 							<div class="timer-application__items">
 								<div class="timer-application__item">
@@ -56,7 +56,7 @@
 							</div>
 							<div class="must-application__label">2. После списания средтв со счета нажмите кнопку <span>“Я оплатил”</span></div>
 						</div>
-						<button type="submit" class="application__button">Я оплатил</button>
+						<button data-popup="#popup" type="submit" class="application__button">Я оплатил</button>
 					</div>
 				</div>
 			</div>
@@ -66,7 +66,19 @@
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20230515224033"></script>
+	<div id="popup" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close"><img src="img/close.svg" alt=""></button>
+				<div class="popup__icon">
+					<img src="img/attention.svg" alt="">
+				</div>
+				<div class="popup__text">Для осуществления следующих обменов вам нужно пройти верификацию</div>
+				<a href="" class="popup__link">Верификация</a>
+			</div>
+		</div>
+	</div>
+	<script src="js/app.min.js?_v=20230515231744"></script>
 </body>
 
 </html>
