@@ -309,61 +309,41 @@
             }));
         }
     }), 0);
-    var timeInMinutes = 1;
-    var currentTime;
-    var initialTime = timeInMinutes * 60;
-    var progressInSeconds;
+    var timeInMinutes = 15;
+    var currentTime = parseInt(localStorage.getItem("timer")) || timeInMinutes * 60;
+    var progressInSeconds = parseInt(localStorage.getItem("progress")) || timeInMinutes * 60 - currentTime;
     var timerElement = document.getElementById("timer");
     var progressElement = document.getElementById("progress");
     function updateTimer() {
         var minutes = Math.floor(currentTime / 60);
         var seconds = currentTime % 60;
-        var timeString = `${Math.max(0, minutes).toString().padStart(2, "0")} мин ${Math.max(0, seconds).toString().padStart(2, "0")} сек`;
+        var timeString = `${minutes.toString().padStart(2, "0")} мин ${seconds.toString().padStart(2, "0")} сек`;
         timerElement.innerText = timeString;
-        var progressPercentage = (initialTime - Math.max(0, progressInSeconds)) / initialTime * 100;
+        var progressPercentage = (timeInMinutes * 60 - progressInSeconds) / (timeInMinutes * 60) * 100;
         progressElement.style.width = progressPercentage + "%";
     }
     function saveTimer() {
         localStorage.setItem("timer", currentTime.toString());
         localStorage.setItem("progress", progressInSeconds.toString());
-        localStorage.setItem("timeInMinutes", timeInMinutes.toString());
     }
-    function loadTimer() {
-        var timerValue = localStorage.getItem("timer");
-        var progressValue = localStorage.getItem("progress");
-        var timeInMinutesValue = localStorage.getItem("timeInMinutes");
-        if (timerValue !== null && progressValue !== null && timeInMinutesValue !== null) {
-            currentTime = Math.max(parseInt(timerValue, 10), 0);
-            progressInSeconds = Math.max(parseInt(progressValue, 10), 0);
-            timeInMinutes = parseInt(timeInMinutesValue, 10);
-            initialTime = timeInMinutes * 60;
-        } else {
-            currentTime = initialTime;
-            progressInSeconds = 0;
-        }
-    }
-    function startTimer() {
-        var timerInterval = setInterval((function() {
-            currentTime--;
-            progressInSeconds = initialTime - currentTime;
-            updateTimer();
-            saveTimer();
-            if (currentTime <= 0) {
-                clearInterval(timerInterval);
-                console.log("Таймер завершен!");
-                localStorage.removeItem("timer");
-                localStorage.removeItem("progress");
-                localStorage.removeItem("timeInMinutes");
-            }
-        }), 1e3);
-    }
-    window.addEventListener("load", (function() {
-        loadTimer();
+    var timerInterval = setInterval((function() {
+        currentTime--;
+        progressInSeconds = timeInMinutes * 60 - currentTime;
         updateTimer();
-        startTimer();
-    }));
-    window.addEventListener("beforeunload", (function() {
         saveTimer();
+        if (currentTime === 0) {
+            clearInterval(timerInterval);
+            console.log("Таймер завершен!");
+            localStorage.removeItem("timer");
+            localStorage.removeItem("progress");
+        }
+    }), 1e3);
+    window.addEventListener("load", (function() {
+        if (localStorage.getItem("timer") && localStorage.getItem("progress")) {
+            currentTime = parseInt(localStorage.getItem("timer"), 10);
+            progressInSeconds = parseInt(localStorage.getItem("progress"), 10);
+            updateTimer();
+        }
     }));
     window["FLS"] = true;
     isWebp();
