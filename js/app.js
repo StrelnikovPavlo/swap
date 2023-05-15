@@ -309,9 +309,10 @@
             }));
         }
     }), 0);
-    var timeInMinutes = 1;
+    var timeInMinutes = 15;
     var currentTime = parseInt(localStorage.getItem("timer")) || timeInMinutes * 60;
-    var progressInSeconds = parseInt(localStorage.getItem("progress")) || timeInMinutes * 60 - currentTime;
+    var initialTime = timeInMinutes * 60;
+    var progressInSeconds = parseInt(localStorage.getItem("progress")) || initialTime - currentTime;
     var timerElement = document.getElementById("timer");
     var progressElement = document.getElementById("progress");
     function updateTimer() {
@@ -319,7 +320,8 @@
         var seconds = currentTime % 60;
         var timeString = `${minutes.toString().padStart(2, "0")} мин ${seconds.toString().padStart(2, "0")} сек`;
         timerElement.innerText = timeString;
-        var progressPercentage = (timeInMinutes * 60 - progressInSeconds) / (timeInMinutes * 60) * 100;
+        var progressPercentage = (initialTime - progressInSeconds) / initialTime * 100;
+        progressPercentage = Math.min(100, Math.max(0, progressPercentage));
         progressElement.style.width = progressPercentage + "%";
     }
     function saveTimer() {
@@ -328,7 +330,7 @@
     }
     var timerInterval = setInterval((function() {
         currentTime--;
-        progressInSeconds = timeInMinutes * 60 - currentTime;
+        progressInSeconds++;
         updateTimer();
         saveTimer();
         if (currentTime === 0) {
@@ -341,7 +343,7 @@
     window.addEventListener("load", (function() {
         if (localStorage.getItem("timer") && localStorage.getItem("progress")) {
             currentTime = parseInt(localStorage.getItem("timer"), 10);
-            progressInSeconds = parseInt(localStorage.getItem("progress"), 10);
+            progressInSeconds = initialTime - currentTime;
             updateTimer();
         }
     }));
