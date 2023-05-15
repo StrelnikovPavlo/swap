@@ -309,7 +309,7 @@
             }));
         }
     }), 0);
-    var timeInMinutes = 15;
+    var timeInMinutes = 1;
     var currentTime = parseInt(localStorage.getItem("timer")) || timeInMinutes * 60;
     var progressInSeconds = parseInt(localStorage.getItem("progress")) || timeInMinutes * 60 - currentTime;
     var timerElement = document.getElementById("timer");
